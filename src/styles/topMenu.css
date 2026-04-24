@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    border-bottom: 2px solid #01748b; 
+}
+
+a{
+   text-decoration: none;
+   color: black;
+}
+
+.frame{
+    max-width: 70%;
+    margin:auto
+}
+
+.rowButtn{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.blue{
+    color: #01748b;
+}

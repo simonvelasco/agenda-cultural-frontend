@@ -1,0 +1,26 @@
+.imgDetail{
+    width: 100%;
+}
+
+.containerDet{
+    margin-right: 5svw;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.separator{
+    margin-bottom: 1.5rem;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3svw;
+    padding-bottom: 3rem;
+}
+
+.topLine{
+    border-top: 2px solid #01748b; 
+    padding-top: 21px;    
+}
+

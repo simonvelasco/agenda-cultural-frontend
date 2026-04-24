@@ -1,0 +1,31 @@
+.soliImg{
+    width: 100%;
+}
+
+.containerSoli{
+    width: 70%;
+    text-align: justify;
+}
+
+
+.btnok{
+    padding: 10px 15px;
+    background-color: #01748b;
+    color: white;
+    border: none;
+    margin-left: 2rem;
+}
+
+
+.btncancel{
+    padding: 10px 15px;
+    background-color: #707070;
+    color: white;
+    border: none;
+    margin-left: 2rem;
+}
+
+.alingLeft{
+    text-align: end;
+    margin-bottom: 4rem;
+}

@@ -1,0 +1,37 @@
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.rowForm{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+input{
+    width: 30svw;
+    height: 25px;
+}
+
+#descripcion{
+    width: 70svw;
+    height: 70px;
+}
+
+#imagen{
+    margin-right: 8px;
+}
+
+.saveButton{
+    display: flex;
+    justify-content: end;
+    margin-top: 3rem;
+}
+
+select{
+    width: 30.5svw;
+    height: 31px;
+    
+}

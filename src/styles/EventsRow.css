@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+.rowImg {
+    width: 100%;
+    height: 200px;
+    /* Altura fija de 200px */
+    object-fit: cover;
+}
+
+.card {
+    width: 20svw;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3svw;
+    padding-bottom: 3rem;
+    border-bottom: 2px solid #01748b; 
+}
+
+.flex{
+    display: flex;
+}
+
+.localLink{
+    text-decoration: underline;
+    color: #01748b;
+}
+
+h1{
+    color: #01748b;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+}
+
+.level1{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; 
+    color: #01748b;
+    font-size: 26px;
+    text-transform: capitalize;
+}
+
+.level2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #01748b;
+    font-size: 18px;
+}
+
+.level3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.centered-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 10px;
+
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;    
+    font-size: 1.5svw;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+
+}
+
+.center{
+    text-align: center;
+}

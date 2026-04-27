@@ -4,6 +4,7 @@ import moment from "moment";
 import { FeaturedEvents } from "./FeaturedEvents";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
+import logo from '../logotipo.png';
 import "../styles/topMenu.css";
 
 export function TopMenu() {
@@ -45,7 +46,7 @@ export function TopMenu() {
   return (
     <div className="row">
       <Link to={`/`}>
-        <img className="" src="src/logotipo.png" alt={"logo"} />
+        <img className="" src={logo} alt={"logo"} />
       </Link>
       <div className="rowButtn">
         <Dropdown

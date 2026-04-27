@@ -46,6 +46,7 @@ export function TopMenu() {
   return (
     <div className="row">
       <Link to={`/`}>
+        <img className="logo" src={logo} alt="logo" />
       </Link>
       <div className="rowButtn">
         <Dropdown

@@ -32,3 +32,8 @@ body{
 .blue{
     color: #01748b;
 }
+
+.logo {
+    height: 50px;
+    width: auto;
+}

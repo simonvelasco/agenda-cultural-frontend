@@ -4,18 +4,18 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-
+import API_URL from "../config";
 
 export function FeaturedEvents() {
   const [data, setData] = useState([]);
-  const [events, setEvents] = useState([]); // Inicializamos events como null
+  const [events, setEvents] = useState([]);
 
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Muestra tres imágenes a la vez
+    slidesToShow: 3,
     slidesToScroll: 1,
-    prevArrow: <button>Previous</button>, // Personaliza las flechas de navegación
+    prevArrow: <button>Previous</button>,
     nextArrow: <button>Next</button>,
   };
 
@@ -24,7 +24,7 @@ export function FeaturedEvents() {
   }, []);
 
   const findEvents = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-destacados/`)
+    fetch(`${API_URL}/eventos/eventos-destacados/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -35,7 +35,6 @@ export function FeaturedEvents() {
   useEffect(() => {
     if (data != undefined) {
       const objectsArray = JSON.parse(JSON.stringify(data));
-
       setEvents(objectsArray);
     }
   }, [data]);
@@ -46,18 +45,18 @@ export function FeaturedEvents() {
       <Slider {...settings}>
         {events.map((evento) => (
           <Link to={`/event-details/${evento.id}`}>
-          <div className="card">
-            <img
-              className="rowImg"
-              src={`http://127.0.0.1:8000${evento.imagen}`}
-              alt={evento.nombre}
-            />
-            <div key={evento.id}>{evento.fecha}</div>
-            <div key={evento.id}>{evento.nombre}</div>
-            <div key={evento.id}>{evento.hora}</div>
-            <div key={evento.id}>{evento.precio}</div>
-          </div>
-        </Link>
+            <div className="card">
+              <img
+                className="rowImg"
+                src={evento.imagen}
+                alt={evento.nombre}
+              />
+              <div key={evento.id}>{evento.fecha}</div>
+              <div key={evento.id}>{evento.nombre}</div>
+              <div key={evento.id}>{evento.hora}</div>
+              <div key={evento.id}>{evento.precio}</div>
+            </div>
+          </Link>
         ))}
       </Slider>
     </>

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/EventForm.css";
 import { TopMenu } from "./topMenu";
 import "../styles/EventsRow.css";
-
+import API_URL from "../config";
 
 export function EventsForm() {
   const [evento, setEvento] = useState({
@@ -64,13 +64,12 @@ export function EventsForm() {
   useEffect(() => {
     if (data != undefined) {
       const objectsArray = JSON.parse(JSON.stringify(data));
-
       setLocals(objectsArray);
     }
   }, [data]);
 
   const findLocals = () => {
-    fetch(`http://127.0.0.1:8000/locales/locales_viewset/`)
+    fetch(`${API_URL}/locales/locales_viewset/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -83,7 +82,7 @@ export function EventsForm() {
     console.log(evento);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/eventos/eventos_viewset/",
+        `${API_URL}/eventos/eventos_viewset/`,
         evento,
         {
           headers: {
@@ -91,11 +90,8 @@ export function EventsForm() {
           },
         }
       );
-
-      // Aquí puedes manejar la respuesta del servidor, como mostrar un mensaje de éxito o redirigir a otra página.
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
-      // Aquí puedes manejar los errores, como mostrar un mensaje de error al usuario.
       console.error("Error al hacer la solicitud POST:", error);
     }
   };

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/EventsRow.css";
+import API_URL from "../config";
 
 export function CategorysRow(props) {
-    const [data, setData] = useState([]);
-    const [events, setEvents] = useState([]); 
+  const [data, setData] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    if (props.date != undefined) {
-      findEvents();
-    }
-  }, [props.date]);
+    findEvents();
+  }, [props.category]);
 
   const findEvents = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-categoria/${props.category}/`)
+    fetch(`${API_URL}/eventos/eventos-categoria/${props.category}/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -37,7 +36,7 @@ export function CategorysRow(props) {
             <div className="card">
               <img
                 className="rowImg"
-                src={`http://127.0.0.1:8000${event.imagen}`}
+                src={event.imagen}
                 alt={event.nombre}
               />
               <div className="level2" key={event.id}>{event.fecha}</div>

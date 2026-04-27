@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/EventsRow.css";
 import { TopMenu } from "./topMenu";
+import API_URL from "../config";
 
 export function LocalDetail() {
   const [local, setLocal] = useState(undefined);
@@ -21,7 +22,7 @@ export function LocalDetail() {
   }, [local]);
 
   const findLocal = () => {
-    fetch(`http://127.0.0.1:8000/locales/locales_viewset/${localName}`)
+    fetch(`${API_URL}/locales/locales_viewset/${localName}`)
       .then((response) => response.json())
       .then((data) => setLocal(data))
       .catch((error) => {
@@ -30,7 +31,7 @@ export function LocalDetail() {
   };
 
   const findEventsByLocal = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-local/${local.nombre}`)
+    fetch(`${API_URL}/eventos/eventos-local/${local.nombre}`)
       .then((response) => response.json())
       .then((data) => setEventsLocal(data))
       .catch((error) => {
@@ -45,7 +46,7 @@ export function LocalDetail() {
         <div className="containerDet">
           <img
             className="imgDetail"
-            src={`http://127.0.0.1:8000${local.imagen}`}
+            src={local.imagen}
             alt={local.imagen}
           />
           <h1>{local.nombre}</h1>
@@ -55,7 +56,7 @@ export function LocalDetail() {
           </div>
           <div className="separator">
             <div>TELÉFONO:</div>
-            <div className="blue" >{local.telefono}</div>
+            <div className="blue">{local.telefono}</div>
           </div>
           <div className="separator">
             <div>WEB:</div>
@@ -72,7 +73,7 @@ export function LocalDetail() {
             <div className="card">
               <img
                 className="rowImg"
-                src={`http://127.0.0.1:8000${evento.imagen}`}
+                src={evento.imagen}
                 alt={evento.nombre}
               />
               <div className="level2" key={evento.id}>{evento.fecha}</div>

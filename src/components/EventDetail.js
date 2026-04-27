@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/EventsRow.css";
 import { TopMenu } from "./topMenu";
+import API_URL from "../config";
 
 export function EventDetail() {
   const [event, setEvent] = useState(undefined);
   const { eventId } = useParams();
   const [eventsCategory, setEventsCategory] = useState([]);
-  const [eventsLocal, setEventsLocal] = useState([]);
 
   useEffect(() => {
     findEvent();
@@ -21,7 +21,7 @@ export function EventDetail() {
   }, [event]);
 
   const findEvent = () => {
-    fetch(`http://127.0.0.1:8000/eventos/evento-local/${eventId}`)
+    fetch(`${API_URL}/eventos/evento-local/${eventId}`)
       .then((response) => response.json())
       .then((data) => setEvent(data))
       .catch((error) => {
@@ -30,7 +30,7 @@ export function EventDetail() {
   };
 
   const findEventsByCategory = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-categoria/${event.categoria}/`)
+    fetch(`${API_URL}/eventos/eventos-categoria/${event.categoria}/`)
       .then((response) => response.json())
       .then((data) => setEventsCategory(data))
       .catch((error) => {
@@ -47,7 +47,7 @@ export function EventDetail() {
             <div className="containerDet">
               <img
                 className="imgDetail"
-                src={`http://127.0.0.1:8000${event.imagen}`}
+                src={event.imagen}
                 alt={event.nombre}
               />
               <h1>{event.nombre}</h1>
@@ -72,21 +72,21 @@ export function EventDetail() {
           )}
         </div>
         <div>
-          <h1 style={{ "margin-top": "4rem" }}>Eventos Relacionados</h1>
+          <h1 style={{ marginTop: "4rem" }}>Eventos Relacionados</h1>
           {eventsCategory.map((evento) =>
             evento.id != event.id ? (
-              <Link to={`/event-details/${event.id}`}>
+              <Link to={`/event-details/${evento.id}`}>
                 <div className="card">
                   <img
                     className="rowImg"
-                    src={`http://127.0.0.1:8000${event.imagen}`}
-                    alt={event.nombre}
+                    src={evento.imagen}
+                    alt={evento.nombre}
                   />
-                  <div className="level2" key={event.id}>{event.fecha}</div>
-                  <div className="level1" key={event.id}>{event.nombre}</div>
-                  <div className="level3"key={event.id}>{event.hora}</div>
-                  <div className="level3" style={{ "margin-bottom": "1rem" }} key={event.id}>
-                    {event.precio}
+                  <div className="level2" key={evento.id}>{evento.fecha}</div>
+                  <div className="level1" key={evento.id}>{evento.nombre}</div>
+                  <div className="level3" key={evento.id}>{evento.hora}</div>
+                  <div className="level3" style={{ marginBottom: "1rem" }} key={evento.id}>
+                    {evento.precio}
                   </div>
                 </div>
               </Link>

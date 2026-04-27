@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/Detail.css";
 import "../styles/Controlpanel.css";
+import API_URL from "../config";
 
 export function ControlPanel() {
   const [events, setEvents] = useState([]);
@@ -14,7 +15,7 @@ export function ControlPanel() {
   }, []);
 
   const findEvents = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-solicitados/`)
+    fetch(`${API_URL}/eventos/eventos-solicitados/`)
       .then((response) => response.json())
       .then((data) => setEvents(JSON.parse(JSON.stringify(data))))
       .catch((error) => {
@@ -23,7 +24,7 @@ export function ControlPanel() {
   };
 
   const findLocals = () => {
-    fetch(`http://127.0.0.1:8000/locales/locales-solicitados/`)
+    fetch(`${API_URL}/locales/locales-solicitados/`)
       .then((response) => response.json())
       .then((data) => setLocals(JSON.parse(JSON.stringify(data))))
       .catch((error) => {
@@ -33,7 +34,7 @@ export function ControlPanel() {
 
   const eliminarLocal = () => {
     fetch(
-      `http://127.0.0.1:8000/locales/locales_viewset/${locals[localsInd].nombre}/`,
+      `${API_URL}/locales/locales_viewset/${locals[localsInd].nombre}/`,
       {
         method: "DELETE",
         headers: {
@@ -56,7 +57,7 @@ export function ControlPanel() {
 
   const eliminarEvento = () => {
     fetch(
-      `http://127.0.0.1:8000/eventos/eventos_viewset/${events[eventsInd].id}/`,
+      `${API_URL}/eventos/eventos_viewset/${events[eventsInd].id}/`,
       {
         method: "DELETE",
         headers: {
@@ -79,12 +80,11 @@ export function ControlPanel() {
 
   const publicarLocal = () => {
     fetch(
-      `http://127.0.0.1:8000/locales/publicar-local/${locals[localsInd].nombre}/`,
+      `${API_URL}/locales/publicar-local/${locals[localsInd].nombre}/`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          // Puedes incluir encabezados de autenticación si es necesario
         },
       }
     )
@@ -93,10 +93,8 @@ export function ControlPanel() {
           console.log("Local publicado con éxito.");
           setLocalsInd(localsInd + 1);
         } else if (response.status === 404) {
-          // Local no encontrado
           console.error("Local no encontrado.");
         } else {
-          // Otro error
           console.error("Error al publicar el local.");
         }
       })
@@ -107,12 +105,11 @@ export function ControlPanel() {
 
   const publicarEvento = () => {
     fetch(
-      `http://127.0.0.1:8000/eventos/publicar-evento/${events[eventsInd].id}/`,
+      `${API_URL}/eventos/publicar-evento/${events[eventsInd].id}/`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          // Puedes incluir encabezados de autenticación si es necesario
         },
       }
     )
@@ -140,7 +137,7 @@ export function ControlPanel() {
           <div className="containerDet">
             <img
               className="imgDetail"
-              src={`http://127.0.0.1:8000${locals[localsInd].imagen}`}
+              src={`${API_URL}${locals[localsInd].imagen}`}
               alt={locals[localsInd].imagen}
             />
             <h1>{locals[localsInd].nombre}</h1>
@@ -158,13 +155,13 @@ export function ControlPanel() {
             </div>
           </div>
           <div className="alingLeft">
-              <button className="btnok" onClick={publicarLocal}>
-                ACEPTAR
-              </button>
-              <button className="btncancel" onClick={eliminarLocal}>
-                RECHAZAR
-              </button>
-            </div>
+            <button className="btnok" onClick={publicarLocal}>
+              ACEPTAR
+            </button>
+            <button className="btncancel" onClick={eliminarLocal}>
+              RECHAZAR
+            </button>
+          </div>
         </div>
       ) : events && eventsInd < events.length ? (
         <div>
@@ -172,7 +169,7 @@ export function ControlPanel() {
           <div className="containerSoli">
             <img
               className="soliImg"
-              src={`http://127.0.0.1:8000${events[eventsInd].imagen}`}
+              src={`${API_URL}${events[eventsInd].imagen}`}
               alt={events[eventsInd].nombre}
             />
             <h1>{events[eventsInd].nombre}</h1>

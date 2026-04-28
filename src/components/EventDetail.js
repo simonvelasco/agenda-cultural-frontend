@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/EventsRow.css";
 import { TopMenu } from "./topMenu";
+import API_URL from "../config";
+
 
 export function EventDetail() {
   const [event, setEvent] = useState(undefined);
@@ -22,7 +24,7 @@ export function EventDetail() {
   }, [event]);
 
   const findEvent = () => {
-    fetch(`http://127.0.0.1:8000/eventos/evento-local/${eventId}`)
+    fetch(`${API_URL}/eventos/evento-local/${eventId}`)
       .then((response) => response.json())
       .then((data) => setEvent(data))
       .catch((error) => {
@@ -31,7 +33,7 @@ export function EventDetail() {
   };
 
   const findEventsByCategory = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-categoria/${event.categoria}/`)
+    fetch(`${API_URL}/eventos/eventos-categoria/${event.categoria}/`)
       .then((response) => response.json())
       .then((data) => setEventsCategory(data))
       .catch((error) => {
@@ -50,7 +52,7 @@ export function EventDetail() {
             <div className="containerDet">
               <img
                 className="imgDetail"
-                src={`http://127.0.0.1:8000${event.imagen}`}
+                src={event.imagen}
                 alt={event.nombre}
               />
               <h1>{event.nombre}</h1>
@@ -82,7 +84,7 @@ export function EventDetail() {
                 <div className="card">
                   <img
                     className="rowImg"
-                    src={`http://127.0.0.1:8000${evento.imagen}`}
+                    src={evento.imagen}
                     alt={event.nombre}
                   />
                   <div className="level2" key={evento.id}>{evento.fecha}</div>

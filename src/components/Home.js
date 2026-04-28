@@ -4,6 +4,7 @@ import moment from "moment";
 import { FeaturedEvents } from "./FeaturedEvents";
 import { TopMenu } from "./topMenu";
 import OptionDropdown from "./OptionDropdown";
+import API_URL from "../config";
 
 export function Home() {
   const [datesArray, setDatesArray] = useState([]);
@@ -48,7 +49,7 @@ export function Home() {
   }, [data]);
 
   const findLocals = () => {
-    fetch(`http://127.0.0.1:8000/locales/locales_viewset/`)
+    fetch(`${API_URL}/locales/locales_viewset/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -121,7 +122,7 @@ export function Home() {
 
   const deletePastEvents = (date) => {
     fetch(
-      `http://127.0.0.1:8000/eventos/eliminar-eventos-anteriores/${date}/`,
+      `${API_URL}/eventos/eliminar-eventos-anteriores/${date}/`,
       {
         method: "DELETE",
         headers: {

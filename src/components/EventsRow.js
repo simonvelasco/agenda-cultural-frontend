@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/EventsRow.css";
 import axios from "axios";
+import API_URL from "../config";
 
 export function EventsRow(props) {
   const [data, setData] = useState([]);
@@ -25,7 +26,7 @@ export function EventsRow(props) {
   }, [props.date, props.filtros]);
 
   const findEvents = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-fecha/${props.date}/`)
+    fetch(`${API_URL}/eventos/eventos-fecha/${props.date}/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -35,7 +36,7 @@ export function EventsRow(props) {
 
   const findFilteredEvents = () => {
     axios
-      .get(`http://127.0.0.1:8000/eventos/eventos-fecha/${props.date}`, {
+      .get(`${API_URL}/eventos/eventos-fecha/${props.date}`, {
         params: props.filtros,
       })
       .then((response) => {
@@ -74,7 +75,7 @@ export function EventsRow(props) {
                 <img
                   key={event.id}
                   className="rowImg"
-                  src={`http://127.0.0.1:8000${event.imagen}`}
+                  src={event.imagen}
                   alt={event.nombre}
                 />
                </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TopMenu } from "./topMenu";
+import API_URL from "../config";
 
 
 export function Locals() {
@@ -11,7 +12,7 @@ export function Locals() {
   }, []);
 
   const findLocals = () => {
-    fetch(`http://127.0.0.1:8000/locales/locales-publicados/`)
+    fetch(`${API_URL}/locales/locales-publicados/`)
       .then((response) => response.json())
       .then((data) => setLocals(data))
       .catch((error) => {
@@ -26,7 +27,7 @@ export function Locals() {
       <div className="container">
       {locals.map((local) => (
         <Link key={local.nombre} className="card" to={`/local-details/${local.nombre}`}>
-          <img  className="rowImg" src={`http://127.0.0.1:8000${local.imagen}`} alt={local.nombre}/>
+          <img  className="rowImg" src={local.imagen} alt={local.nombre}/>
           <div className="centered-text">{local.nombre}</div>
         </Link>
       ))}

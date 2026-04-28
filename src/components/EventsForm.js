@@ -3,6 +3,7 @@ import axios from "axios";
 import "../styles/EventForm.css";
 import { TopMenu } from "./topMenu";
 import "../styles/EventsRow.css";
+import API_URL from "../config";
 
 
 export function EventsForm() {
@@ -78,7 +79,7 @@ export function EventsForm() {
   }, [data]);
 
   const findLocals = () => {
-    fetch(`http://127.0.0.1:8000/locales/locales_viewset/`)
+    fetch(`${API_URL}/locales/locales_viewset/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -91,7 +92,7 @@ export function EventsForm() {
     console.log(evento);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/eventos/eventos_viewset/",
+        `${API_URL}/eventos/eventos_viewset/`,
         evento,
         {
           headers: {

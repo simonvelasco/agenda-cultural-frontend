@@ -3,6 +3,7 @@ import axios from "axios";
 import "../styles/EventForm.css";
 import { TopMenu } from "./topMenu";
 import "../styles/Controlpanel.css";
+import API_URL from "../config";
 
 
 
@@ -39,7 +40,7 @@ export function LocalsForm() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/locales/locales_viewset/",
+        `${API_URL}/locales/locales_viewset/`,
         local,
         {
           headers: {

@@ -6,6 +6,8 @@ import icon from "../trash_icon.png";
 import { TopMenuAdmin } from "./topMenuAdmin";
 import "../styles/EventAdmin.css";
 import axios from "axios";
+import API_URL from "../config";
+
 
 
 export function EventAdmin() {
@@ -16,7 +18,7 @@ export function EventAdmin() {
   }, []);
 
   const findEvents = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-publicados/`)
+    fetch(`${API_URL}/eventos/eventos-publicados/`)
       .then((response) => response.json())
       .then((data) => setEvents(JSON.parse(JSON.stringify(data))))
       .catch((error) => {
@@ -27,7 +29,7 @@ export function EventAdmin() {
   const deleteEvent = (id) => {
     console.log(id)
     axios
-    .delete(`http://127.0.0.1:8000/eventos/eventos_viewset/${id}/`)
+    .delete(`${API_URL}/eventos/eventos_viewset/${id}/`)
     .then((response) => {
       if (response.status === 204) {
         console.log('La instancia se eliminó correctamente.');

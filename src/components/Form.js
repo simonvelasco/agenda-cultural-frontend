@@ -3,6 +3,7 @@ import axios from "axios";
 import "../styles/EventForm.css";
 import { TopMenu } from "./topMenu";
 import { useNavigate } from 'react-router-dom';
+import API_URL from "../config";
 
 
 export function Form() {
@@ -17,7 +18,7 @@ export function Form() {
     e.preventDefault();
     console.log(contraseña)
     try {
-      const response = await axios.post('http://127.0.0.1:8000/usuarios/login/', {
+      const response = await axios.post(`${API_URL}/usuarios/login/`, {
         username: nombre,
         password: contraseña,
       });

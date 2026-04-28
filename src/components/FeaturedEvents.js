@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import "../styles/EventsRow.css";
+import API_URL from "../config";
 
 
 
@@ -26,7 +27,7 @@ export function FeaturedEvents() {
   }, []);
 
   const findEvents = () => {
-    fetch(`http://127.0.0.1:8000/eventos/eventos-destacados/`)
+    fetch(`${API_URL}/eventos/eventos-destacados/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -51,7 +52,7 @@ export function FeaturedEvents() {
           <div className="cardCarousel">
             <img
               className="rowImg"
-              src={`http://127.0.0.1:8000${evento.imagen}`}
+              src={evento.imagen}
               alt={evento.nombre}
             />
             <div className="level2" key={evento.id}>{evento.fecha}</div>

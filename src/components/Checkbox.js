@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { useState } from 'react';
+import API_URL from "../config";
 
 function Checkbox(props) {
   const [isChecked, setIsChecked] = useState(props.initiallyChecked);
@@ -15,7 +16,7 @@ function Checkbox(props) {
 
   const destacarEvento = () => {
     fetch(
-      `http://127.0.0.1:8000/eventos/destacar-evento/${props.id}/`,
+      `${API_URL}/eventos/destacar-evento/${props.id}/`,
       {
         method: "PUT",
         headers: {
@@ -32,7 +33,7 @@ function Checkbox(props) {
 
   const publicarEvento = () => {
     fetch(
-      `http://127.0.0.1:8000/eventos/publicar-evento/${props.id}/`,
+      `${API_URL}/eventos/publicar-evento/${props.id}/`,
       {
         method: "PUT",
         headers: {

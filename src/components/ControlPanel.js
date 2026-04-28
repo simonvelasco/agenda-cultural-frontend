@@ -142,7 +142,7 @@ export function ControlPanel() {
           <div className="containerSoli">
             <img
               className="imgDetail"
-              src={`${API_URL}${locals[localsInd].imagen}`}
+              src={locals[localsInd].imagen}
               alt={locals[localsInd].imagen}
             />
             <h1>{locals[localsInd].nombre}</h1>

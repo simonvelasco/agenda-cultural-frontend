@@ -4,19 +4,21 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import API_URL from "../config";
+import "../styles/EventsRow.css";
+
+
 
 export function FeaturedEvents() {
   const [data, setData] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]); // Inicializamos events como null
 
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 3, // Muestra tres imágenes a la vez
     slidesToScroll: 1,
-    prevArrow: <button>Previous</button>,
-    nextArrow: <button>Next</button>,
+    prevArrow: <button></button>, // Personaliza las flechas de navegación
+    nextArrow: <button></button>,
   };
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function FeaturedEvents() {
   }, []);
 
   const findEvents = () => {
-    fetch(`${API_URL}/eventos/eventos-destacados/`)
+    fetch(`http://127.0.0.1:8000/eventos/eventos-destacados/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -35,28 +37,29 @@ export function FeaturedEvents() {
   useEffect(() => {
     if (data != undefined) {
       const objectsArray = JSON.parse(JSON.stringify(data));
+
       setEvents(objectsArray);
     }
   }, [data]);
 
   return (
     <>
-      <h1>Eventos destacados</h1>
+      <div className="title2">Eventos destacados</div>
       <Slider {...settings}>
         {events.map((evento) => (
           <Link to={`/event-details/${evento.id}`}>
-            <div className="card">
-              <img
-                className="rowImg"
-                src={evento.imagen}
-                alt={evento.nombre}
-              />
-              <div key={evento.id}>{evento.fecha}</div>
-              <div key={evento.id}>{evento.nombre}</div>
-              <div key={evento.id}>{evento.hora}</div>
-              <div key={evento.id}>{evento.precio}</div>
-            </div>
-          </Link>
+          <div className="cardCarousel">
+            <img
+              className="rowImg"
+              src={`http://127.0.0.1:8000${evento.imagen}`}
+              alt={evento.nombre}
+            />
+            <div className="level2" key={evento.id}>{evento.fecha}</div>
+              <div className="level1" key={evento.id}>{evento.nombre}</div>
+              <div className="level3" key={evento.id}>{evento.hora}</div>
+              <div className="level3" key={evento.id}>{evento.precio}</div>
+          </div>
+        </Link>
         ))}
       </Slider>
     </>

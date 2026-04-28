@@ -4,14 +4,13 @@ import moment from "moment";
 import { FeaturedEvents } from "./FeaturedEvents";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
-import logo from '../logotipo.png';
 import "../styles/topMenu.css";
+import logo from "../logotipo.png"
 
 export function TopMenu() {
   const [selectedPub, setSelectedPub] = useState(null);
   const [catLinks, setCatLinks] = useState([]);
   const [selectedCat, setSelectedCat] = useState(null);
-
 
   const categorias = [
     "Música",
@@ -29,8 +28,14 @@ export function TopMenu() {
   ];
 
   useEffect(() => {
-    categorias.map((cat) => setCatLinks([...catLinks, `/category/${cat}`]));
+    const newCatLinks = categorias.map((cat) => `/category/${cat}`);
+    setCatLinks(newCatLinks);
+    //console.log(categorias)  
+      //console.log(catLinks)
+
   }, []);
+
+
 
   const handleSelectPub = (item) => {
     setSelectedPub(item);
@@ -40,13 +45,13 @@ export function TopMenu() {
     setSelectedCat(item);
   };
 
-  const itemsPublicar = ["Evento", "Local"];
+  const itemsPublicar = ["Eventoㅤㅤㅤ", "Local"];
   const linksPublicar = ["/add-event", "/add-local"];
 
   return (
     <div className="row">
       <Link to={`/`}>
-        <img className="logo" src={logo} alt="logo" />
+        <img className="logo" src={logo} alt={"logo"} />
       </Link>
       <div className="rowButtn">
         <Dropdown

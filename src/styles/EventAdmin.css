@@ -1,0 +1,29 @@
+.rowEvent{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #01748b;
+    font-size: 18px;
+    align-items: center;
+    border-bottom: 2px solid #959696; 
+    height: 4rem;
+}
+
+.subRow{
+    display: flex;
+    align-items: center;
+    gap: 2svw;
+}
+
+.checkbox{
+    width: 30px;
+    height: 30px;
+}
+
+
+.trash{
+    background-color: white;
+    border: none;
+}

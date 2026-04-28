@@ -1,6 +1,7 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-right: 2rem;
   }
   
   .dropdown-toggle {
@@ -37,4 +38,15 @@
   .dropdown.open .dropdown-menu {
     display: block;
   }
+
+  .miniCheck{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
   
+ .labelRow{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ }

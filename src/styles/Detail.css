@@ -1,11 +1,12 @@
 .imgDetail{
-    width: 100%;
+   height: 540px;
 }
 
 .containerDet{
     margin-right: 5svw;
-    margin-top: 4rem;
+    margin-top: 3rem;
     margin-bottom: 4rem;
+    text-align: justify;
 }
 
 .separator{

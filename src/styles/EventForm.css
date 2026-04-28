@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: .75rem;
+    align-items: start;
 }
 
 .rowForm{
@@ -33,5 +34,44 @@ input{
 select{
     width: 30.5svw;
     height: 31px;
-    
 }
+
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 4px;
+    text-align: center; 
+    font-size: 18px;
+  }
+  
+  
+  
+  .modal button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+ 

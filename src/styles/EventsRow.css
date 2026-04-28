@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
 .rowImg {
     width: 100%;
-    height: 200px;
+    height: 230px;
     /* Altura fija de 200px */
     object-fit: cover;
 }
@@ -9,18 +9,37 @@
 .card {
     width: 20svw;
     position: relative;
+    margin-right: 3svw;
+    margin-bottom: 3rem;
+}
+
+.cardCarousel {
+    width: 20svw;
+    margin: auto;
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 3svw;
-    padding-bottom: 3rem;
-    border-bottom: 2px solid #01748b; 
+    margin:auto;
 }
 
 .flex{
     display: flex;
+}
+
+.date{
+    border-top: 2px solid #01748b; 
+    padding-top: 1rem;
+
+}
+
+
+
+.cat{
+    border-top: 2px solid #01748b; 
+    padding-top: 1rem;
+    margin-top: 0px;
 }
 
 .localLink{
@@ -34,12 +53,36 @@ h1{
     font-weight: 900;
 }
 
+.title{
+    color: #6c6d70;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: center;
+    padding: 3rem;
+    border-bottom: 2px solid #01748b; 
+    margin-bottom: 3rem;
+}
+
+.title2{
+    color: #6c6d70;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: center;
+    padding: 3rem;
+}
+
+
 .level1{
     font-family: 'Roboto', sans-serif;
     font-weight: 500; 
     color: #01748b;
     font-size: 26px;
     text-transform: capitalize;
+    
 }
 
 .level2{
@@ -76,4 +119,28 @@ h1{
 
 .center{
     text-align: center;
+}
+
+
+.slick-prev::before, .slick-next:before{
+    color: #01748b  !important;
+    font-size: 30px !important;
+
+}
+
+.slick-next:focus{
+    color: #01748b !important;
+}
+
+.slick-prev {
+    left: -50px !important;
+}
+
+.slick-next {
+    right: -50px !important;
+}
+
+.spaceBtn{
+    display: flex;
+    justify-content: space-between;
 }

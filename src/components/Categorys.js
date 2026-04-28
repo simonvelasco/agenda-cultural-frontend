@@ -1,40 +1,41 @@
 import { CategorysRow } from "./CategorysRow";
 import { useEffect, useState } from "react";
-import moment from "moment";
-import { FeaturedEvents } from "./FeaturedEvents";
 import { TopMenu } from "./topMenu";
+import { useParams } from "react-router-dom";
 
 export function Categorys(props) {
-    const categorias = [
-        "Música",
-        "Escénicas",
-        "Arte",
-        "Cine",
-        "Literatura",
-        "Infantiles",
-        "Especiales",
-        "Gastronómicos",
-        "Entretenimiento",
-        "Aire Libre",
-        "Deportivos",
-      ];
+  const [categorias, setCategorias] = useState(["Música",
+  "Escénicas",
+  "Arte",
+  "Cine",
+  "Literatura",
+  "Infantiles",
+  "Especiales",
+  "Gastronómicos",
+  "Entretenimiento",
+  "Aire Libre",
+  "Deportivos",]);
+
+  const { category } = useParams();
 
   useEffect(() => {
-    if (props.category != undefined) {
-        if(props.category != "Ver todas"){
-            categorias = [props.category]
-            console.log(categorias)
-        }
+    if (category != undefined) {
+      if (category != "Ver todas") {
+        setCategorias([category])
+        console.log(categorias);
+        console.log(props.category);
+      }
     }
-  }, []);
-    
+  }, [category]);
+
   return (
     <>
-      <TopMenu/>
+      <TopMenu />
+      <div className="title2">Categorias</div>
+
       {categorias.map((cat, index) => (
         <CategorysRow key={index} category={cat} />
       ))}
     </>
   );
-  
 }

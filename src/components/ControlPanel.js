@@ -142,7 +142,7 @@ export function ControlPanel() {
           <div className="containerSoli">
             <img
               className="imgDetail"
-              src={locals[localsInd].imagen}
+              src={locals[localsInd].imagen_url}
               alt={locals[localsInd].imagen}
             />
             <h1>{locals[localsInd].nombre}</h1>

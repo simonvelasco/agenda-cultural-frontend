@@ -35,38 +35,35 @@ export function LocalsForm() {
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  const formData = new FormData();
+  formData.append("nombre", local.nombre);
+  formData.append("ubicacion", local.ubicacion);
+  formData.append("telefono", local.telefono);
+  formData.append("web", local.web);
+  formData.append("estado", local.estado);
+  if (local.imagen) {
+    formData.append("imagen", local.imagen);
+  }
 
-    try {
-      const response = await axios.post(
-        `${API_URL}/locales/locales_viewset/`,
-        local,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // Aquí puedes manejar la respuesta del servidor, como mostrar un mensaje de éxito o redirigir a otra página.
-      console.log("Respuesta del servidor:", response.data);
-      openModal()
-    } catch (error) {
-      // Aquí puedes manejar los errores, como mostrar un mensaje de error al usuario.
-      console.error("Error al hacer la solicitud POST:", error);
-    }
-  };
-
-
-  const openModal = () => {
-      setIsOpen(true);
-    
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  try {
+    const response = await axios.post(
+      `${API_URL}/locales/locales_viewset/`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("Respuesta del servidor:", response.data);
+    setIsOpen(true);
+  } catch (error) {
+    console.error("Error al hacer la solicitud POST:", error);
+  }
+};
 
   return (
     <div>

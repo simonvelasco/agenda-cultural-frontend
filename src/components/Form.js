@@ -66,7 +66,7 @@ export function Form() {
           </div>
         </div>
         <div className="saveButton">
-          <button type="submit">Guardar Local</button>
+          <button className="btnok" type="submit">Acceder</button>
         </div>
       </form>
       </div>

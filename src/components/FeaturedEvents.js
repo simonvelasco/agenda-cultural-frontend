@@ -40,6 +40,7 @@ export function FeaturedEvents() {
       const objectsArray = JSON.parse(JSON.stringify(data));
 
       setEvents(objectsArray);
+      console.log(events)
     }
   }, [data]);
 

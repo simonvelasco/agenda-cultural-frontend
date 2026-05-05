@@ -140,6 +140,19 @@ h1{
     right: -50px !important;
 }
 
+.slick-slider {
+    width: 100%;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+.slick-track {
+    display: flex;
+    align-items: center;
+}
+
 .spaceBtn{
     display: flex;
     justify-content: space-between;

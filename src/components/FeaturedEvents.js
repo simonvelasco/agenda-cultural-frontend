@@ -14,12 +14,20 @@ export function FeaturedEvents() {
   const [events, setEvents] = useState([]); // Inicializamos events como null
 
   const settings = {
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 3, // Muestra tres imágenes a la vez
+    slidesToShow: 3,
     slidesToScroll: 1,
-    prevArrow: <button></button>, // Personaliza las flechas de navegación
+    prevArrow: <button></button>,
     nextArrow: <button></button>,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
   };
 
   useEffect(() => {

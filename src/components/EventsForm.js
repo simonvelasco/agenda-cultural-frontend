@@ -1,37 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "../styles/EventForm.css";
 import { TopMenu } from "./topMenu";
 import "../styles/EventsRow.css";
 import API_URL from "../config";
 
-
 export function EventsForm() {
-
-  const initialEvento = {
-    nombre: "",
-    fecha: "",
-    hora: "",
-    horario: "",
-    precio: "",
-    categoria: "",
-    local: {
-      nombre: "",
-      ubicacion: "",
-      telefono: "",
-      web: "",
-    },
-    descripcion: "",
-    imagen: null,
-    estado: "solicitado",
-  };
-
-  const [evento, setEvento] = useState(initialEvento);
-
   const [data, setData] = useState([]);
   const [locals, setLocals] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isError, setIsError] = useState(false);
+  const formRef = useRef(null);
 
   const categorias = [
     "Música",
@@ -47,34 +26,15 @@ export function EventsForm() {
     "Deportivos",
   ];
 
-  const horario = ["Mañana", "Tarde", "Noche", "Todo el dia"]
-
-
-  const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-
-    if (type === "file") {
-      setEvento({
-        ...evento,
-        [name]: files[0],
-      });
-    } else {
-      setEvento({
-        ...evento,
-        [name]: value,
-      });
-    }
-  };
+  const horarios = ["Mañana", "Tarde", "Noche", "Todo el dia"];
 
   useEffect(() => {
     findLocals();
   }, []);
 
   useEffect(() => {
-    if (data != undefined) {
-      const objectsArray = JSON.parse(JSON.stringify(data));
-
-      setLocals(objectsArray);
+    if (data !== undefined) {
+      setLocals(JSON.parse(JSON.stringify(data)));
     }
   }, [data]);
 
@@ -89,44 +49,29 @@ export function EventsForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(evento);
+
+    const formData = new FormData(formRef.current);
+    formData.append("estado", "solicitado");
+
     try {
       const response = await axios.post(
         `${API_URL}/eventos/eventos_viewset/`,
-        evento,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
-
-      // Aquí puedes manejar la respuesta del servidor, como mostrar un mensaje de éxito o redirigir a otra página.
       console.log("Respuesta del servidor:", response.data);
-      openModal()
-      setEvento(initialEvento);
+      setIsOpen(true);
+      formRef.current.reset();
     } catch (error) {
-      // Aquí puedes manejar los errores, como mostrar un mensaje de error al usuario.
       console.error("Error al hacer la solicitud POST:", error);
+      setIsError(true);
     }
   };
-
-
-  const openModal = () => {
-    setIsOpen(true);
-  
-};
-
-const closeModal = () => {
-  setIsOpen(false);
-  setEvento(initialEvento);
-};
 
   return (
     <div>
       <TopMenu />
-      <div className="title" >Publicar Evento</div>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <div className="title">Publicar Evento</div>
+      <form ref={formRef} onSubmit={handleSubmit}>
         <div className="rowForm">
           <div className="column">
             <label htmlFor="nombre">Nombre:</label>
@@ -134,8 +79,6 @@ const closeModal = () => {
               type="text"
               id="nombre"
               name="nombre"
-              value={evento.nombre}
-              onChange={handleChange}
               required
             />
           </div>
@@ -145,8 +88,6 @@ const closeModal = () => {
               type="date"
               id="fecha"
               name="fecha"
-              value={evento.fecha}
-              onChange={handleChange}
               required
             />
           </div>
@@ -158,21 +99,14 @@ const closeModal = () => {
               type="text"
               id="hora"
               name="hora"
-              value={evento.hora}
-              onChange={handleChange}
               required
             />
           </div>
           <div className="column">
             <label htmlFor="horario">Horario:</label>
-            <select
-              id="horario"
-              name="horario"
-              value={evento.horario}
-              onChange={handleChange}
-            >
+            <select id="horario" name="horario">
               <option value="">Selecciona un horario</option>
-              {horario.map((hora, index) => (
+              {horarios.map((hora, index) => (
                 <option key={index} value={hora}>
                   {hora}
                 </option>
@@ -187,19 +121,12 @@ const closeModal = () => {
               type="text"
               id="precio"
               name="precio"
-              value={evento.precio}
-              onChange={handleChange}
               required
             />
           </div>
           <div className="column">
             <label htmlFor="categoria">Categoría:</label>
-            <select
-              id="categoria"
-              name="categoria"
-              value={evento.categoria}
-              onChange={handleChange}
-            >
+            <select id="categoria" name="categoria">
               <option value="">Selecciona una categoría</option>
               {categorias.map((cat, index) => (
                 <option key={index} value={cat}>
@@ -212,12 +139,7 @@ const closeModal = () => {
         <div className="rowForm">
           <div className="column">
             <label htmlFor="local">Local:</label>
-            <select
-              id="local"
-              name="local"
-              value={evento.local.nombre}
-              onChange={handleChange}
-            >
+            <select id="local" name="local">
               <option value="">Selecciona un local</option>
               {locals.map((local, index) => (
                 <option key={index} value={local.nombre}>
@@ -233,7 +155,6 @@ const closeModal = () => {
               id="imagen"
               name="imagen"
               accept="image/*"
-              onChange={handleChange}
             />
           </div>
         </div>
@@ -242,8 +163,6 @@ const closeModal = () => {
           <textarea
             id="descripcion"
             name="descripcion"
-            value={evento.descripcion}
-            onChange={handleChange}
             required
           />
         </div>
@@ -251,20 +170,28 @@ const closeModal = () => {
           <button className="btnok" type="submit">ENVIAR</button>
         </div>
       </form>
-      <div>
-        {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal">
-              <div className="modal-content">
-                <div>
-                 Se ha enviado la solicitud correctamente!
-                </div>
-                <button className="btnok" onClick={closeModal}>Aceptar</button>
-              </div>
+
+      {isOpen && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-content">
+              <div>Se ha enviado la solicitud correctamente!</div>
+              <button className="btnok" onClick={() => setIsOpen(false)}>Aceptar</button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {isError && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-content">
+              <div>Ha ocurrido un error al enviar la solicitud. Por favor inténtalo de nuevo.</div>
+              <button className="btncancel" onClick={() => setIsError(false)}>Cerrar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

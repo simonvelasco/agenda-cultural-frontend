@@ -7,6 +7,7 @@ import API_URL from "../config";
 
 export function LocalsForm() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isError, setIsError] = useState(false);
   const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
@@ -25,6 +26,7 @@ export function LocalsForm() {
       formRef.current.reset();
     } catch (error) {
       console.error("Error al hacer la solicitud POST:", error);
+      setIsError(true);
     }
   };
 
@@ -85,12 +87,24 @@ export function LocalsForm() {
           <button className="btnok" type="submit">ENVIAR</button>
         </div>
       </form>
+
       {isOpen && (
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal-content">
               <div>Se ha enviado la solicitud correctamente!</div>
               <button className="btnok" onClick={() => setIsOpen(false)}>Aceptar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isError && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-content">
+              <div>Ha ocurrido un error al enviar la solicitud. Por favor inténtalo de nuevo.</div>
+              <button className="btncancel" onClick={() => setIsError(false)}>Cerrar</button>
             </div>
           </div>
         </div>

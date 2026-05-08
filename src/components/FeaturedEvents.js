@@ -52,6 +52,8 @@ export function FeaturedEvents() {
     }
   }, [data]);
 
+  if (events.length === 0) return null;
+
   return (
     <>
       <div className="title2">Eventos destacados</div>
